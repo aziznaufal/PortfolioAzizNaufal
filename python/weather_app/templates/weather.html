@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="card">
+        
+        <form action="/" method="POST" style="margin-bottom: 30px; text-align: center;">
+            <input type="text" name="city" placeholder="Enter city name..." 
+                style="padding: 10px; width: 60%; border-radius: 10px; border: none; font-size: 1em;" required>
+            <button type="submit" 
+                    style="padding: 10px 20px; border: none; border-radius: 10px; background-color: #1e3c72; color: white; font-size: 1em; cursor: pointer;">
+                Search
+            </button>
+        </form>
+    </div>
+
+    <!-- <form method="post">
+    <input name="city" placeholder="Enter city" required>
+    <input type="submit" value="Get Weather">
+    </form> -->
+
+    {% if weather.error %}
+        <div class="weather-card">
+            <p style="color: red;">{{ weather.error }}</p>
+        </div>
+    {% elif weather %}
+        <div class="weather-card">
+            <div class="location">{{ weather.location }}, {{ weather.country }}</div>
+            <img class="icon" src="{{ weather.icon }}" alt="weather icon">
+            <div class="temperature">{{ weather.temperature }}°C</div>
+            <div class="description">{{ weather.description }}</div>
+            <div class="info-grid">
+                <div><strong>Feels Like:</strong> {{ weather.feels_like }}°C</div>
+                <div><strong>Humidity:</strong> {{ weather.humidity }}%</div>
+                <div><strong>Wind:</strong> {{ weather.wind_speed }} km/h {{ weather.wind_direction }}</div>
+                <div><strong>Pressure:</strong> {{ weather.pressure }} hPa</div>
+                <div><strong>Precipitation:</strong> {{ weather.precipitation }} mm</div>
+                <div><strong>Cloud Cover:</strong> {{ weather.cloud_cover }}%</div>
+                <div><strong>Visibility:</strong> {{ weather.visibility }} km</div>
+            </div>
+        </div>
+    {% endif %}
+
+    <script>
+        $(document).ready(function() {
+            $(".weather-card").fadeIn(800);
+        });
+    </script>
+</body>
+</html>
