@@ -1,5 +1,7 @@
 import threading
 import webview
+import time
+import requests
 import signal
 import sys
 from flask import Flask, render_template, request, url_for
@@ -23,6 +25,18 @@ def handle_shutdown(signum, frame):
     webview.destroy()  # Close the webview window
     sys.exit(0)  # Exit the program
 
+def wait_for_server(url, timeout=2):
+    """Wait until Flask server is up and running."""
+    start_time = time.time()
+    while True:
+        try:
+            requests.get(url)
+            return
+        except requests.exceptions.ConnectionError:
+            if time.time() - start_time > timeout:
+                raise TimeoutError("Flask server did not start in time.")
+            time.sleep(0.5)
+
 # Main entry point
 if __name__ == '__main__':
     # Register signal handler to handle Ctrl+C (SIGINT)
@@ -33,6 +47,7 @@ if __name__ == '__main__':
     flask_thread.daemon = True  # Ensure it exits when the main thread exits
     flask_thread.start()
 
+    wait_for_server("http://127.0.0.1:5000")
     # Open the webview as a desktop app
     webview.create_window("Weather Desktop App", "http://localhost:5000")
 
