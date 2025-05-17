@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Password Generator</h2>
+<form id="password-form">
+  <label>
+    Length:
+    <input type="number" id="length" name="length" min="1" value="12" required />
+  </label>
+  <label><input type="checkbox" id="use_upper" checked /> Include Uppercase</label>
+  <label><input type="checkbox" id="use_lower" checked /> Include Lowercase</label>
+  <label><input type="checkbox" id="use_digits" checked /> Include Digits</label>
+  <label><input type="checkbox" id="use_symbols" /> Include Symbols</label>
+  <button type="submit">Generate</button>
+</form>
+
+<p>Your password: <code id="password-output"></code></p>
+<button id="copy-btn" disabled>Copy to Clipboard</button>
+{% endblock %}

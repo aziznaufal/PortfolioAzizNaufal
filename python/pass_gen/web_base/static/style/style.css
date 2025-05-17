@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #1e1e2f;
+  color: #eee;
+}
+
+.windowed-app {
+  margin: 20px auto;
+  max-width: 480px;
+  background: #2a2a40;
+  border-radius: 8px;
+  box-shadow: 0 0 20px #000;
+  padding: 20px;
+}
+
+.app-header nav {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.app-header nav a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.app-header nav a:hover,
+.app-header nav a.active {
+  color: #61dafb;
+}
+
+form label {
+  display: block;
+  margin: 10px 0;
+}
+
+button {
+  background: #61dafb;
+  border: none;
+  color: #222;
+  font-weight: bold;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #444;
+  cursor: not-allowed;
+}
