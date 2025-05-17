@@ -18,6 +18,8 @@ A simple Django web application for securely encrypting and decrypting text usin
 - Python version: 3.8+
 
 ## 📸 Preview
+![image](https://github.com/user-attachments/assets/ad0e68b6-c6eb-4288-b666-8118a63a541c)
+![image](https://github.com/user-attachments/assets/15966f3c-8cb6-4519-9a92-531d24708cf6)
 
 
 ## 🚀 Getting Started
