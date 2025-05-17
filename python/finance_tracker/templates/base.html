@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Finance Tracker{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="manifest" href="/static/manifest/manifest.json" />
+    <meta name="theme-color" content="#3b82f6" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body[data-theme="dark"] {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        body[data-theme="light"] {
+            background-color: #f4f4f4;
+            color: #111;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 1rem;
+        }
+
+        input,
+        button,
+        select {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            width: 100%;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 0.3rem 0;
+            padding: 0.5rem;
+            background: #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body class="light" id="theme">
+    <div id="app">
+        <!-- Navbar -->
+
+        <!-- Sidebar -->
+        <input type="checkbox" id="nav-toggle" hidden />
+        <label for="nav-toggle" class="burger">&#9776;</label>
+
+        <nav class="sidebar">
+            <div class="navbar-brand">💰<span> Finance Tracker</span></div>
+            <a href="/" class="nav-item">🏠 Home</a>
+            <a href="/add" class="nav-item">➕ Add</a>
+            <a href="/list" class="nav-item">📋 Transactions</a>
+            <button @click="toggleTheme">
+                Toggle [[ theme === 'light' ? '🌙 Dark' : '☀️ Light' ]] Mode
+            </button>
+        </nav>
+
+        <!-- <nav class="navbar">
+            <div class="navbar-left">
+                <a href="/" class="navbar-brand">💰 Finance Tracker</a>
+            </div>
+            <div class="navbar-right">
+                <a href="/" class="nav-item">Home</a>
+                <a href="/add" class="nav-item">Add Transaction</a>
+                <a href="/list" class="nav-item">Transactions</a>
+                <button @click="toggleTheme">
+                    Toggle [[ theme === 'light' ? '🌙 Dark' : '☀️ Light' ]] Mode
+                </button>
+            </div>
+        </nav> -->
+
+        <!-- Page content -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>

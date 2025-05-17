@@ -1,0 +1,26 @@
+
+  {% extends "base.html" %}
+  {% block title %}Input Daily Transaction{% endblock %}
+
+  {% block content %}
+  <div class="container">
+    <h1>Personal Finance Tracker</h1>
+
+    
+
+    <h3>Balance: [[ balance.toFixed(2) ]]</h3>
+
+    <form @submit.prevent="addTransaction">
+      <input v-model="newTransaction.description" type="text" placeholder="Description" required />
+      <input v-model.number="newTransaction.amount" type="number" placeholder="Amount" required />
+      <input v-model="newTransaction.category" type="text" placeholder="Category" required />
+      <button type="submit">Add Transaction</button>
+    </form>
+
+    <ul>
+      <li v-for="txn in transactions" :key="txn.id">
+        [[ txn.description ]] - [[ txn.amount ]] ([[ txn.category ]])
+      </li>
+    </ul>
+  </div>
+  {% endblock %}

@@ -1,0 +1,14 @@
+[
+  {
+    "id": 123456789,
+    "description": "Test",
+    "amount": 100,
+    "category": "Test"
+  },
+  {
+    "id": 1747510241232,
+    "description": "eee",
+    "amount": 2000,
+    "category": "apa lagi"
+  }
+]
