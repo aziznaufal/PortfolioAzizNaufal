@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Encrypt & Decrypt Messages with RSA</h1>
+
+    <form id="encryptionForm" method="post">
+        {% csrf_token %}
+
+        <!-- Hidden field to determine the action (encrypt or decrypt) -->
+        <input type="hidden" name="action" id="actionType">
+
+        <!-- Message Input -->
+        <div class="form-group">
+            <label for="message">Message to Encrypt</label>
+            {{ form.message }}
+        </div>
+
+        <!-- Public Key Input for Encryption -->
+        <div class="form-group">
+            <label for="public_key">Public Key for Encryption</label>
+            {{ form.public_key }}
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="form-group">
+            <button type="button" onclick="submitForm('encrypt')">Encrypt Message</button>
+        </div>
+        <textarea name="result" cols="40" rows="10" required="" id="resultEncrypt" spellcheck="false"></textarea>
+
+        <!-- Encrypted Message Input for Decryption -->
+        <div class="form-group">
+            <label for="encrypted_message">Encrypted Message</label>
+            {{ form.encrypted_message }}
+        </div>
+
+        <!-- Private Key Input for Decryption -->
+        <div class="form-group">
+            <label for="private_key">Private Key for Decryption</label>
+            {{ form.private_key }}
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="form-group">
+            <button type="button" onclick="submitForm('decrypt')">Decrypt Message</button>
+        </div>
+        <textarea name="result" cols="40" rows="10" required="" id="resultDecrypt" spellcheck="false"></textarea>
+    </form>
+
+    <!-- Result Display -->
+    <div id="result"></div>
+</div>
+
+<script>
+    function submitForm(action) {
+        // Set the action type (either encrypt or decrypt)
+        document.getElementById('actionType').value = action;
+
+        // Get the form element
+        const form = document.getElementById('encryptionForm');
+
+        // Create a FormData object to send form data
+        const formData = new FormData(form);
+
+        // Send the form data to the server
+        fetch("{% url 'encrypt_message' %}", {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response based on the action type (encrypt/decrypt)
+            if (action === 'encrypt' && data.encrypted_message) {
+                document.getElementById('resultEncrypt').innerText = "Encrypted Message: " + data.encrypted_message;
+                document.getElementById('result').innerText = "";
+            } else if (action === 'decrypt' && data.decrypted_message) {
+                document.getElementById('resultDecrypt').innerText = "Decrypted Message: " + data.decrypted_message;
+                document.getElementById('result').innerText = "";
+            } else {
+                document.getElementById('result').innerText = "Error: " + data.error;
+            }
+        })
+        .catch(error => {
+            document.getElementById('result').innerText = "An error occurred: " + error;
+        });
+    }
+</script>
+
+{% endblock %}

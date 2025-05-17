@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Project{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Global Toolbar -->
+    <div class="toolbar">
+        <a href="{% url 'home' %}" class="toolbar-item">HOME</a>
+        <a href="{% url 'encrypt_message' %}" class="toolbar-item">RSA Encryption</a>
+<!-- Add more menu items as needed -->
+    </div>
+
+    <!-- Content Section -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
