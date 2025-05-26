@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Add Coin - Crypto Tracker{% endblock %}
+
+{% block content %}
+<h2>Crypto Tracker</h2>
+
+<!-- Search -->
+<input v-model="searchQuery" @input="searchCoins" placeholder="Search coins..." />
+
+<ul v-if="searchResults.length">
+  <li v-for="coin in searchResults" :key="coin.id" @click="selectCoin(coin)">
+    [[ coin.name ]] ([[ coin.symbol ]])
+  </li>
+</ul>
+
+<!-- Chart -->
+<div v-if="selectedCoin">
+    <h3>[[ selectedCoin.name ]]</h3>
+    <select v-model="interval" @change="fetchChartData">
+        <option value="1m">1m</option>
+        <option value="5m">5m</option>
+        <option value="15m">15m</option>
+        <option value="1h">1h</option>
+        <option value="1d">1d</option>
+    </select>
+
+    <button @click="chartType='line'; renderChart()">Line</button>
+    <button @click="chartType='candlestick'; renderChart()">Candle</button>
+
+    <canvas id="priceChart" width="800" height="400"></canvas>
+
+    <p>Live Price: $[[ livePrice ]]</p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}
