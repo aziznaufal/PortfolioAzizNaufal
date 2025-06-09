@@ -2,6 +2,9 @@
 
 A simple and powerful Windows GUI app to **compare two Excel files** and detect cell-level differences — built with Python, Pandas, and Tkinter.
 
+![image](https://github.com/user-attachments/assets/2de41596-92b3-4ebd-b74e-5a6f32c541db)
+
+
 ---
 
 ## 🚀 Features
